@@ -1,9 +1,10 @@
-<!-- Header-->
+<!-- Header -->
 <header id="header" class="header">
 
 	<div class="header-menu">
 
 		<div class="col-sm-12">
+			<a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
 			<div class="user-area dropdown float-right">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					<img class="user-avatar rounded-circle" src="{{ asset('sufee/images/admin.jpg') }}" alt="User Avatar">

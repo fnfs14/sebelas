@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use View;
+use DB;
+use Auth;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +16,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        View::composer('*', function ($view) {
+            // if (Auth::check() == 'true') {
+				// View::share('_btnIcon', $_btnIcon);
+            // }
+        });
+		// _btnIcon::creating(function ($btn,$icon) {
+            // return $this->_btnIcon($btn,$icon);
+        // });
     }
 
     /**

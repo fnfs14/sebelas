@@ -11,10 +11,13 @@
 |
 */
 
-Route::get('/', function(){
-	return redirect('dashboard');
-});
-Route::get('/dashboard', 'beranda\index');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::get('/', function(){
+	return redirect('dashboard');
+});
+Route::get('/dashboard', 'admin\index');
+Route::resource('/menu/admin', 'admin\menu');

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\beranda;
+namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -15,6 +15,6 @@ class index extends Controller
      */
     public function __invoke(Request $request)
     {
-        return view('beranda.index');
+        return view('admin.dashboard.index');
     }
 }

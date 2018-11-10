@@ -7,8 +7,8 @@
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
 				<i class="fa fa-bars"></i>
 			</button>
-			<a class="navbar-brand" href="./"><img src="{{ asset('sufee/images/logo.png') }}" alt="Logo"></a>
-			<a class="navbar-brand hidden" href="./"><img src="{{ asset('sufee/images/logo2.png') }}" alt="Logo"></a>
+			<a class="navbar-brand" href="{{ url('/') }}">Sebelas</a>
+			<a class="navbar-brand hidden" href="{{ url('/') }}">S</a>
 		</div>
 
 		<div id="main-menu" class="main-menu collapse navbar-collapse">
@@ -16,8 +16,12 @@
 				<li class="active">
 					<a href="{{ url('/') }}"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
 				</li>
-				<li>
-					<a href="{{ url('/') }}"> <i class="menu-icon ti ti-menu-alt"></i>Menu </a>
+				<li class="menu-item-has-children dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon ti-menu-alt"></i>Menu</a>
+					<ul class="sub-menu children dropdown-menu">
+						<li><i class="ti-layout-menu-v"></i><a href="{{ url('menu/admin') }}">Admin</a></li>
+						<li><i class="ti-layout-menu-separated"></i><a href="{{ url('menu/client') }}">Client</a></li>
+					</ul>
 				</li>
 			</ul>
 		</div><!-- /.navbar-collapse -->
