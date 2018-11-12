@@ -7,31 +7,40 @@ use App\Http\Controllers\Controller;
 use App\_Menu;
 use Uuid;
 use Validator;
+use Illuminate\Support\Facades\URL;
 
 class menu extends Controller
 {
     function index(Request $r){
 		$i = 1; // increment
+		$menu = "admin"; // option
+		if($r->is('menu/client')){
+			$menu = "client";
+		}
 		$data = _Menu::withTrashed()
-			->where('menu','admin')
+			->where('menu',$menu)
 			->whereNull('parent')
 			->orderBy('judul', 'ASC')
-			->get(); // get all menu admin data
+			->get(); // get all menu data
 		$sub = _Menu::withTrashed()
-			->where('menu','admin')
+			->where('menu',$menu)
 			->whereNotNull('parent')
 			->orderBy('judul', 'ASC')
-			->get(); // get all sub menu admin data
-		return view('admin.menu.admin', compact('data','sub','i'));
+			->get(); // get all sub menu data
+		return view('admin.menu.index', compact('data','sub','i','menu'));
 	}
 	public function store(Request $r){
-		$id = Uuid::generate(); // generate primary key
+		$menu = "admin";
+		if($r->is('menu/client')){
+			$menu = "client";
+		}
+		$id = _uuid('menu','id'); // generate primary key
 		$query = _Menu::create([
 			'id' => $id,
 			'judul' => $r->judul,
 			'url' => $r->url,
 			'parent' => $r->parent,
-			'menu' => 'admin',
+			'menu' => $menu,
 			'created_at' => now(),
 			'updated_at' => null,
 			'deleted_at' => null
@@ -45,25 +54,37 @@ class menu extends Controller
 		}
 		session()->flash('text', $text);
 		session()->flash('indicator', $indicator);
-		return redirect('menu/admin');
+		return redirect('menu/'.$menu);
 	}
-	public function show($id){
+	public function show(Request $r, $id){
+		$_menu = "admin";
+		if(strpos($r->url(), 'client')){
+			$_menu = "client";
+		}
 		$data = _Menu::withTrashed()->where('id', $id);
 		$menu = $data->first();
 		$data->restore();
 		session()->flash('text', $menu->judul . ' Berhasil dimunculkan.');
 		session()->flash('indicator', 'success');
-		return redirect('menu/admin');
+		return redirect('menu/'.$_menu);
 	}
-	public function destroy($id){
+	public function destroy(Request $r, $id){
+		$_menu = "admin";
+		if(strpos($r->url(), 'client')){
+			$_menu = "client";
+		}
         $menu = _Menu::findOrFail($id);
         $menu->delete();
 		$sub = _Menu::where('parent',$id)->delete();
 		session()->flash('text', $menu->judul . ' Berhasil dihilangkan.');
 		session()->flash('indicator', 'warning');
-        return redirect('menu/admin');
+        return redirect('menu/'.$_menu);
 	}
 	public function update(Request $r, $id){
+		$menu = "admin";
+		if($r->is('menu/client')){
+			$menu = "client";
+		}
         _Menu::where('id', $id)
 			->update([
 				'judul' => $r->judul,
@@ -72,6 +93,6 @@ class menu extends Controller
 			]);
 		session()->flash('text', $r->judul . ' Berhasil diubah.');
 		session()->flash('indicator', 'success');
-        return redirect('menu/admin');
+        return redirect('menu/'.$menu);
 	}
 }

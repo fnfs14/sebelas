@@ -12,12 +12,16 @@
 */
 
 Auth::routes();
+Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('register')->middleware('r');
+Route::get('/password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request')->middleware('r');
+Route::get('/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset')->middleware('r');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home')->middleware('r');
+Route::get('/home', 'HomeController@index')->name('home')->middleware('r');
 
-
-Route::get('/', function(){
-	return redirect('dashboard');
+Route::group(['middleware' => ['loggedin']], function () {
+	Route::get('/dashboard', 'admin\index');
+	Route::resource('/menu/admin', 'admin\menu');
+	Route::resource('/menu/client', 'admin\menu');
+	Route::resource('/carousel', 'admin\carousel');
 });
-Route::get('/dashboard', 'admin\index');
-Route::resource('/menu/admin', 'admin\menu');

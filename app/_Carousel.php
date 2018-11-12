@@ -5,18 +5,12 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class _Menu extends Model
+class _Carousel extends Model
 {
 	use SoftDeletes;
-    protected $table = 'menu';
+    protected $table = 'carousel';
 	protected $primaryKey = 'id';
     protected $guarded = [];
 	public $incrementing = false;
 	protected $dates = ['deleted_at'];
-
-    // public function submenu()
-    // {
-    	// return $this->belongsTo(_Menu::class, 'parent');
-		// return $this->hasMany(_Menu::class, 'parent', 'id');
-    // }
 }

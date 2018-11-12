@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use View;
-use DB;
+use App\_Menu;
 use Auth;
 
 class AppServiceProvider extends ServiceProvider
@@ -17,13 +17,16 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         View::composer('*', function ($view) {
-            // if (Auth::check() == 'true') {
-				// View::share('_btnIcon', $_btnIcon);
-            // }
+            if (Auth::check() == 'true') {				
+				$_menu = _Menu::withTrashed()
+					->where('menu','admin')
+					->whereNull('parent')
+					->orderBy('judul', 'ASC')
+					->get(); // get all menu data
+            }else{
+			}
+			View::share('_menu', $_menu);
         });
-		// _btnIcon::creating(function ($btn,$icon) {
-            // return $this->_btnIcon($btn,$icon);
-        // });
     }
 
     /**
