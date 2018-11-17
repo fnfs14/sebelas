@@ -24,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
 					->orderBy('judul', 'ASC')
 					->get(); // get all menu data
             }else{
+				$_menu = null;
 			}
 			View::share('_menu', $_menu);
         });

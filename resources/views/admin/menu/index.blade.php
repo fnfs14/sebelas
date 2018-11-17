@@ -17,7 +17,7 @@
 				<div class="card-header">
 					<strong class="card-title txt-transform-capt">{{$menu}}</strong>
 					<button type="button" class="btn btn-outline-secondary mb-1 float-right btn-sm" data-toggle="modal" data-target="#smallmodal">
-						<span class="ti-plus"></span>
+						<span class="fa fa-plus"></span>
 						Tambah
 					</button>
 				</div>
@@ -42,23 +42,23 @@
 								</td>
 								<td class="txt-center">
 									@if($a->deleted_at != "")										
-										{!! _btnIcon('danger','ti-close', 'Tidak Aktif') !!} <!-- btn type, icon, title -->
+										{!! _btnIcon('danger','fa fa-times', 'Tidak Aktif') !!} <!-- btn type, icon, title -->
 									@else
-										{!! _btnIcon('success','ti-check', 'Aktif') !!}
+										{!! _btnIcon('success','fa fa-check', 'Aktif') !!}
 									@endif
 								</td>
 								<td class="txt-center">
 									@if($a->deleted_at != "")										
-										{!! _aIcon('secondary','ti-eye', 'Munculkan', url('menu/'.$menu.'/'.$a->id)) !!}
+										{!! _aIcon('secondary','fa fa-eye', 'Munculkan', url('menu/'.$menu.'/'.$a->id)) !!}
 									@else
-										{!! _btnIcon('primary add_submenu','ti-plus', 'Munculkan', $a->id) !!} <!-- btn type classes, icon, title, primary -->
-										{!! _btnIcon('info edit_menu','ti-pencil', 'Ubah', $a->id) !!} <!-- btn type classes, icon, title, primary -->
+										{!! _btnIcon('primary add_submenu','fa fa-plus', 'Munculkan', $a->id) !!} <!-- btn type classes, icon, title, primary -->
+										{!! _btnIcon('info edit_menu','fa fa-pencil', 'Ubah', $a->id) !!} <!-- btn type classes, icon, title, primary -->
 										{!! Form::open([
                                                 'method' => 'DELETE',
                                                 'url' => ['/menu/'.$menu, $a->id],
                                                 'style' => 'display:inline'
                                             ]) !!}
-											{!! Form::button('<i class="ti-close" aria-hidden="true"></i>', array(
+											{!! Form::button('<i class="fa fa-eye-slash" aria-hidden="true"></i>', array(
 													'type' => 'submit',
 													'class' => 'btn btn-secondary btn-sm',
 													'title' => 'Hilangkan',
@@ -78,22 +78,22 @@
 									</td>
 									<td class="txt-center">
 										@if($z->deleted_at != "")										
-											{!! _btnIcon('danger','ti-close', 'Tidak Aktif') !!} <!-- btn type, icon, title -->
+											{!! _btnIcon('danger','fa fa-eye-slash', 'Tidak Aktif') !!} <!-- btn type, icon, title -->
 										@else
-											{!! _btnIcon('success','ti-check', 'Aktif') !!}
+											{!! _btnIcon('success','fa fa-check', 'Aktif') !!}
 										@endif
 									</td>
 									<td class="txt-center">
 										@if($z->deleted_at != "")										
-											{!! _aIcon('secondary','ti-eye', 'Munculkan', url('menu/'.$menu.'/'.$z->id)) !!}
+											{!! _aIcon('secondary','fa fa-eye', 'Munculkan', url('menu/'.$menu.'/'.$z->id)) !!}
 										@else
-											{!! _btnIcon('info edit_menu','ti-pencil', 'Ubah', $z->id) !!} <!-- btn type classes, icon, title, primary -->
+											{!! _btnIcon('info edit_menu','fa fa-pencil', 'Ubah', $z->id) !!} <!-- btn type classes, icon, title, primary -->
 											{!! Form::open([
 													'method' => 'DELETE',
 													'url' => ['/menu/'.$menu, $z->id],
 													'style' => 'display:inline'
 												]) !!}
-												{!! Form::button('<i class="ti-close" aria-hidden="true"></i>', array(
+												{!! Form::button('<i class="fa fa-eye-slash" aria-hidden="true"></i>', array(
 														'type' => 'submit',
 														'class' => 'btn btn-secondary btn-sm',
 														'title' => 'Hilangkan',
@@ -125,15 +125,15 @@
 				<div class="modal-body ajax-form">
 					<form action="{{ url('menu/'.$menu) }}" method="post">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
-						<input type="text" name="judul" placeholder="Judul" class="form-control mrg5" required />
-						<input type="text" name="url" placeholder="URL" class="form-control mrg5" required />
+						<input type="text" name="judul" placeholder="Judul" class="form-control mrg5" maxlength="255" required />
+						<input type="text" name="url" placeholder="URL" class="form-control mrg5" maxlength="255" required />
 						<input type="hidden" name="parent" placeholder="parent" class="form-control mrg5" />
 						<input name="form_method" type="hidden" value="PATCH">
 					</form>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-					<button type="button" class="btn btn-primary" onclick="_confirm()">Confirm</button>
+					<button type="button" class="btn btn-primary" onclick="_confirm()">Save</button>
 				</div>
 			</div>
 		</div>
@@ -141,6 +141,9 @@
 @endsection
 
 @push('scripts')
+<script>
+	var _url = "{{ url('menu/'.$menu) }}";
+</script>
 <script src="{{ asset('js/admin/menu.js') }}"></script>
 @endpush
 
@@ -167,21 +170,5 @@
 @endsection
 
 @push('styles')
-<style>
-	.card-title {
-		font-size: 20px;
-	}
-	.mrg5 {
-		margin-bottom : 5px;
-	}
-	.txt-transform-capt {
-		text-transform: capitalize;
-	}
-	.txt-center {
-		text-align : center;
-	}
-	.txt-dec-und {
-		text-decoration : underline;
-	}
-</style>
+    <link rel="stylesheet" href="{{ asset('css/admin/main.css') }}">
 @endpush

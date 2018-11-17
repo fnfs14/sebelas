@@ -23,5 +23,6 @@ Route::group(['middleware' => ['loggedin']], function () {
 	Route::get('/dashboard', 'admin\index');
 	Route::resource('/menu/admin', 'admin\menu');
 	Route::resource('/menu/client', 'admin\menu');
-	Route::resource('/carousel', 'admin\carousel');
+	Route::resource('/poster', 'admin\poster');
+	Route::resource('/file', 'admin\file');
 });

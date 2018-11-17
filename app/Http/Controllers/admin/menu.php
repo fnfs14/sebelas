@@ -5,8 +5,6 @@ namespace App\Http\Controllers\admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\_Menu;
-use Uuid;
-use Validator;
 use Illuminate\Support\Facades\URL;
 
 class menu extends Controller
@@ -34,7 +32,7 @@ class menu extends Controller
 		if($r->is('menu/client')){
 			$menu = "client";
 		}
-		$id = _uuid('menu','id'); // generate primary key
+		$id = $this->_uuid('menu','id'); // generate primary key
 		$query = _Menu::create([
 			'id' => $id,
 			'judul' => $r->judul,

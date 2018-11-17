@@ -9,7 +9,7 @@
 				<a id="" class="menutoggle pull-right" title="Log Out" href="{{ route('logout') }}"
 				   onclick="event.preventDefault();
 								 document.getElementById('logout-form').submit();">
-					<i class="ti-power-off"></i>
+					<i class="fa fa-power-off"></i>
 				</a>
 
 				<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

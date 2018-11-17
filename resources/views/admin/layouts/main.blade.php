@@ -52,7 +52,7 @@
     <script src="{{ asset('sufee/assets/js/main.js') }}"></script>
 
 
-    <script src="{{ asset('sufee/vendors/chart.js/dist/Chart.bundle.min.js') }}"></script>
+    <!--<script src="{{ asset('sufee/vendors/chart.js/dist/Chart.bundle.min.js') }}"></script>-->
     <!--<script src="{{ asset('sufee/assets/js/dashboard.js') }}"></script>-->
     <!--<script src="{{ asset('sufee/assets/js/widgets.js') }}"></script>-->
     <script src="{{ asset('sufee/vendors/jqvmap/dist/jquery.vmap.min.js') }}"></script>

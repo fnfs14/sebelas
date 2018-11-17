@@ -1,0 +1,15 @@
+.card-title {
+	font-size: 20px;
+}
+.mrg5 {
+	margin-bottom : 5px;
+}
+.txt-transform-capt {
+	text-transform: capitalize;
+}
+.txt-center {
+	text-align : center;
+}
+.txt-dec-und {
+	text-decoration : underline;
+}
