@@ -24,7 +24,8 @@
 					</ul>
 				</li>
 				@foreach($_menu as $a)
-					@if(_countTable('menu','parent',$a->id)==0)
+					<?php $_sidebar = Sebelas::table('menu','parent',$a->id); ?>
+					@if($_sidebar->count()==0)
 						<li class="">
 							<a href="{{ url($a->url) }}"> <i class="menu-icon fa fa-dot-circle-o"></i>{{ $a->judul }} </a>
 						</li>
@@ -32,7 +33,7 @@
 						<li class="menu-item-has-children dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-dot-circle-o"></i>{{ $a->judul }}</a>
 							<ul class="sub-menu children dropdown-menu">
-							@foreach(_getTable('menu','parent',$a->id) as $z)
+							@foreach($_sidebar->get() as $z)
 								<li><i class="fa fa-circle-o"></i><a href="{{ url($z->url) }}">{{ $z->judul }}</a></li>
 							@endforeach
 							</ul>

@@ -1329,6 +1329,23 @@ header.fixed-top {
   margin: -2px 20px 0 -57px;
   text-align: center;
   width: 43px; }
+.btn-logout {
+  background: #e74c3c;
+  border-radius: 50%;
+  color: #fff !important;
+  cursor: pointer;
+  font-size: 18px;
+  height: 43px;
+  line-height: 44px;
+  margin: -2px 20px 0 -57px;
+  text-align: center;
+  width: 43px; }
+.btn-logout:hover {
+  background: #da301e;
+}
+.btn-logout:active {
+  background: #c71a08;
+}
 
 .open .menutoggle i:before {
   content: "\f0a4"; }

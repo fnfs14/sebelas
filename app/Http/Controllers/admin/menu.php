@@ -43,15 +43,7 @@ class menu extends Controller
 			'updated_at' => null,
 			'deleted_at' => null
 		]); // store menu
-		if(!$query){ // if failed
-			$text = 'Gagal menambahkan.';
-			$indicator = 'warning';
-		}else{ // if success
-			$text = 'Berhasil menambahkan ' . $r->judul;
-			$indicator = 'success';
-		}
-		session()->flash('text', $text);
-		session()->flash('indicator', $indicator);
+		$this->_flashStore($query,$r->judul);
 		return redirect('menu/'.$menu);
 	}
 	public function show(Request $r, $id){
@@ -61,9 +53,8 @@ class menu extends Controller
 		}
 		$data = _Menu::withTrashed()->where('id', $id);
 		$menu = $data->first();
-		$data->restore();
-		session()->flash('text', $menu->judul . ' Berhasil dimunculkan.');
-		session()->flash('indicator', 'success');
+		$query = $data->restore();
+		$this->_flashShow($query,$menu->judul);
 		return redirect('menu/'.$_menu);
 	}
 	public function destroy(Request $r, $id){
@@ -72,10 +63,9 @@ class menu extends Controller
 			$_menu = "client";
 		}
         $menu = _Menu::findOrFail($id);
-        $menu->delete();
+        $query = $menu->delete();
 		$sub = _Menu::where('parent',$id)->delete();
-		session()->flash('text', $menu->judul . ' Berhasil dihilangkan.');
-		session()->flash('indicator', 'warning');
+		$this->_flashDestroy($query,$menu->judul);
         return redirect('menu/'.$_menu);
 	}
 	public function update(Request $r, $id){
@@ -83,14 +73,13 @@ class menu extends Controller
 		if($r->is('menu/client')){
 			$menu = "client";
 		}
-        _Menu::where('id', $id)
+        $query = _Menu::where('id', $id)
 			->update([
 				'judul' => $r->judul,
 				'url' => $r->url,
 				'updated_at' => now()
 			]);
-		session()->flash('text', $r->judul . ' Berhasil diubah.');
-		session()->flash('indicator', 'success');
+		$this->_flashUpdate($query,$r->judul);
         return redirect('menu/'.$menu);
 	}
 }

@@ -18,6 +18,7 @@
 					<strong class="card-title txt-transform-capt">{{$breadcrumb}} Poster</strong>
 				</div>
 				<div class="card-body">
+					<form action="{{ url('poster') }}" method="post" enctype="multipart/form-data">
 					<table id="" class="table">
 						<tbody>
 							<tr>
@@ -27,17 +28,27 @@
 							<tr>
 								<th><label for="thumbnail">Thumbnail</label></th>
 								<th>
-									<input type="file" class="form-control" id="thumbnail" name="thumbnail" onchange="readURL(this);" />
+									<input type="file" class="form-control" id="thumbnail" name="thumbnail[]" onchange="readURL(this);" />
 									<br hidden />
 									<img id="preview_thumbnail" src="#" alt="Thumbnail" hidden />
 								</th>
 							</tr>
 							<tr>
-								<th><label for="isi">Isi</label></th>
-								<th><textarea name="isi" id="isi"></textarea></th>
+								<th rowspan="2"><label for="isi">Isi</label></th>
+								<th>
+									<button type="button" class="btn btn-secondary mb-1 float-left btn-sm" data-toggle="modal" data-target="#smallmodal">
+										<span class="fa fa-file"></span>
+										File
+									</button>
+								</th>
 							</tr>
 							<tr>
-								<th><button type="button" class="btn btn-primary" onclick="_z()">Save</button></th>
+								<th>
+									<textarea name="isi" id="isi"></textarea>
+								</th>
+							</tr>
+							<tr>
+								<th><button type="submit" class="btn btn-primary">Save</button></th>
 								<th>
 									<input name="form_method" type="hidden" value="PATCH">
 									<input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -45,11 +56,53 @@
 							</tr>
 						</tbody>
 					</table>
+					</form>
 				</div>
 			</div>
             </div><!-- .animated -->
         
 	</div> <!-- .content -->
+	<div class="modal fade" id="smallmodal" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="smallmodalLabel">Uploaded File</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<table id="bootstrap-data-table-export" class="table table-striped table-bordered">
+						<thead>
+							<th>No</th>
+							<th>Nama</th>
+							<th>File</th>
+							<th width="20%">Aksi</th>
+						</thead>
+						<tbody>
+						@foreach($file as $a)
+							<td>{{ $i++ }}</td>
+							<td>{{ $a->nama }}</td>
+							<td>
+								<input type="text" id="_file{{$i}}" value="{{ asset('upload/file/'. $a->id .'/'. $a->file) }}"
+									class="form-control" readonly />
+							</td>
+							<td class="txt-center" width="20%">
+								<a href="{{ asset('upload/file/'. $a->id .'/'. $a->file) }}" class="btn btn-primary btn-sm txt-dec-und"
+									target="_blank" title="Open File">
+									<span class="fa fa-external-link"></span>
+								</a>
+								<button type="button" title="Copy" class="btn btn-secondary btn-sm" onclick="copyFile({{$i}})">
+									<span class="fa fa-copy"></span>
+								</button>
+							</td>
+						@endforeach
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
 @endsection
 
 @push('scripts')
@@ -71,8 +124,18 @@
                 reader.readAsDataURL(input.files[0]);				
 				$("br").prop('hidden',false);
 				$("#preview_thumbnail").prop('hidden',false);
-            }
+            }else{
+				$("br").prop('hidden',true);
+				$("#preview_thumbnail").prop('hidden',true);
+			}
         }
+		function copyFile(a) {
+			var copyText = document.getElementById("_file"+a);
+			copyText.select();
+			document.execCommand("copy");
+			alert("Copied!");
+			$("#smallmodal").modal('hide');
+		}
 	</script>
 @endpush
 
@@ -99,12 +162,5 @@
 @endsection
 
 @push('styles')
-<style>
-	.card-title {
-		font-size: 20px;
-	}
-	.width20 {
-		width : 20%;
-	}
-</style>
+    <link rel="stylesheet" href="{{ asset('css/admin/main.css') }}">
 @endpush

@@ -41,18 +41,53 @@
 									<a href="{{ url($a->url) }}" class="txt-dec-und">{{ $a->url }}</a>
 								</td>
 								<td class="txt-center">
-									@if($a->deleted_at != "")										
-										{!! _btnIcon('danger','fa fa-times', 'Tidak Aktif') !!} <!-- btn type, icon, title -->
+									@if($a->deleted_at != "")
+									<?php
+										$_btn = 'danger';
+										$_title = 'Tidak Aktif';
+										$_icon = 'fa fa-times';
+									?>
 									@else
-										{!! _btnIcon('success','fa fa-check', 'Aktif') !!}
+									<?php
+										$_btn = 'success';
+										$_title = 'Aktif';
+										$_icon = 'fa fa-check';
+									?>
 									@endif
+									<button type='button' class='btn btn-{{$_btn}} btn-sm' title='{{$_title}}'>
+										<span class='{{$_icon}}'></span>
+									</button>
 								</td>
 								<td class="txt-center">
-									@if($a->deleted_at != "")										
-										{!! _aIcon('secondary','fa fa-eye', 'Munculkan', url('menu/'.$menu.'/'.$a->id)) !!}
+									@if($a->deleted_at != "")
+										<?php
+											$_link = url('menu/'.$menu.'/'.$a->id);
+											$_btn = 'secondary';
+											$_title = 'Munculkan';
+											$_icon = 'fa fa-eye';
+										?>
+										<a href='{{$_link}}' class='btn btn-{{$_btn}} btn-sm' title='{{$_title}}'>
+											<span class='{{$_icon}}'></span>
+										</a>
 									@else
-										{!! _btnIcon('primary add_submenu','fa fa-plus', 'Munculkan', $a->id) !!} <!-- btn type classes, icon, title, primary -->
-										{!! _btnIcon('info edit_menu','fa fa-pencil', 'Ubah', $a->id) !!} <!-- btn type classes, icon, title, primary -->
+										<?php
+											$_btn = 'primary add_submenu';
+											$_icon = 'fa fa-plus';
+											$_title = 'Tambah Sub-menu';
+											$_primary = $a->id;
+										?>
+										<button type='button' class='btn btn-{{$_btn}} btn-sm' title='{{$_title}}' primary='{{$_primary}}'>
+											<span class='{{$_icon}}'></span>
+										</button>
+										<?php
+											$_btn = 'info edit_menu';
+											$_title = 'Ubah';
+											$_primary = $a->id;
+											$_icon = 'fa fa-pencil';
+										?>
+										<button type='button' class='btn btn-{{$_btn}} btn-sm' title='{{$_title}}' primary='{{$_primary}}'>
+											<span class='{{$_icon}}'></span>
+										</button>
 										{!! Form::open([
                                                 'method' => 'DELETE',
                                                 'url' => ['/menu/'.$menu, $a->id],
@@ -78,16 +113,43 @@
 									</td>
 									<td class="txt-center">
 										@if($z->deleted_at != "")										
-											{!! _btnIcon('danger','fa fa-eye-slash', 'Tidak Aktif') !!} <!-- btn type, icon, title -->
-										@else
-											{!! _btnIcon('success','fa fa-check', 'Aktif') !!}
+											<?php
+												$_btn = 'danger';
+												$_title = 'Tidak Aktif';
+												$_icon = 'fa fa-times';
+											?>
+										@else							
+											<?php
+												$_btn = 'success';
+												$_title = 'Aktif';
+												$_icon = 'fa fa-check';
+											?>
 										@endif
+										<button type='button' class='btn btn-{{$_btn}} btn-sm' title='{{$_title}}'>
+											<span class='{{$_icon}}'></span>
+										</button>
 									</td>
 									<td class="txt-center">
 										@if($z->deleted_at != "")										
-											{!! _aIcon('secondary','fa fa-eye', 'Munculkan', url('menu/'.$menu.'/'.$z->id)) !!}
+											<?php
+												$_link = url('menu/'.$menu.'/'.$z->id);
+												$_btn = 'secondary';
+												$_title = 'Munculkan';
+												$_icon = 'fa fa-eye';
+											?>
+											<a href='{{$_link}}' class='btn btn-{{$_btn}} btn-sm' title='{{$_title}}'>
+												<span class='{{$_icon}}'></span>
+											</a>
 										@else
-											{!! _btnIcon('info edit_menu','fa fa-pencil', 'Ubah', $z->id) !!} <!-- btn type classes, icon, title, primary -->
+											<?php
+												$_btn = 'info edit_menu';
+												$_title = 'Ubah';
+												$_primary = $z->id;
+												$_icon = 'fa fa-pencil';
+											?>
+											<button type='button' class='btn btn-{{$_btn}} btn-sm' title='{{$_title}}' primary='{{$_primary}}'>
+												<span class='{{$_icon}}'></span>
+											</button>
 											{!! Form::open([
 													'method' => 'DELETE',
 													'url' => ['/menu/'.$menu, $z->id],

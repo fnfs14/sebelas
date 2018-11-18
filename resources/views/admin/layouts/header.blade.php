@@ -6,7 +6,7 @@
 		<div class="col-sm-12">
 			<a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
 			<div class="user-area dropdown float-right">
-				<a id="" class="menutoggle pull-right" title="Log Out" href="{{ route('logout') }}"
+				<a id="" class="btn-logout pull-right" title="Log Out" href="{{ route('logout') }}"
 				   onclick="event.preventDefault();
 								 document.getElementById('logout-form').submit();">
 					<i class="fa fa-power-off"></i>
