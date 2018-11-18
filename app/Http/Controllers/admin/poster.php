@@ -11,7 +11,11 @@ use App\_Poster;
 class poster extends Controller
 {
     function index(Request $r){
-		return view('admin.poster.index');
+		$data = _Poster::withTrashed()
+			->orderBy('judul', 'ASC')
+			->get(); // get all poster data
+		$i = 1;
+		return view('admin.poster.index', compact('data','i'));
 	}
 	function create(Request $r){
 		$breadcrumb = "Create";
@@ -34,5 +38,26 @@ class poster extends Controller
 		]); // store upload
 		$this->_flashStore($query,$r->judul);
 		return redirect('poster');
+	}
+	function update(Request $r, $id){
+        $r = $r->all();
+        $data = _Poster::findOrFail($id);
+        $query = $data->update($r);
+		$this->_flashUpdate($query,$data->judul);
+		return redirect('poster');
+	}
+	function edit(Request $r, $id){
+		$breadcrumb = "Edit";
+		$file = _File::get();
+		$i = 1;
+        $data = _Poster::findOrFail($id);
+		return view('admin.poster.form', compact('breadcrumb','file','i','data'));
+	}
+	function show($id){
+		$breadcrumb = "Detail";
+		$file = _File::get();
+		$i = 1;
+        $data = _Poster::findOrFail($id);
+		return view('admin.poster.form', compact('breadcrumb','file','i','data'));
 	}
 }

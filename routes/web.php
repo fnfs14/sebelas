@@ -10,6 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::fallback(function () {
+    return redirect('/');
+});
 
 Auth::routes();
 Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('register')->middleware('r');

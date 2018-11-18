@@ -42,7 +42,15 @@
 									</a>
 								</td>
 								<td class="txt-center">
-									{!! _btnIcon('info edit_file','fa fa-pencil', 'Ubah', $a->id) !!} <!-- btn type classes, icon, title, primary -->
+									<?php
+										$_btn = 'info edit_file';
+										$_title = 'Ubah';
+										$_primary = $a->id;
+										$_icon = 'fa fa-pencil';
+									?>
+									<button type='button' class='btn btn-{{$_btn}} btn-sm' title='{{$_title}}' primary='{{$_primary}}'>
+										<span class='{{$_icon}}'></span>
+									</button>
 								</td>
 							</tr>
 						@endforeach

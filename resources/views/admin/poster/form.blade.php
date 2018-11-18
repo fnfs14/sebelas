@@ -16,44 +16,79 @@
 			<div class="card">
 				<div class="card-header">
 					<strong class="card-title txt-transform-capt">{{$breadcrumb}} Poster</strong>
+					<a href="{{ url('poster') }}" class="btn btn-outline-secondary mb-1 float-right btn-sm">
+						<span class="fa fa-arrow-left"></span>
+						Kembali
+					</a>
 				</div>
 				<div class="card-body">
-					<form action="{{ url('poster') }}" method="post" enctype="multipart/form-data">
+					<form action="{{ (!isset($data)) ? url('poster') : url('poster/'.$data->id) }}"
+						method="post" enctype="multipart/form-data">
 					<table id="" class="table">
 						<tbody>
 							<tr>
 								<th class="width20"><label for="judul">Judul</label></th>
-								<th><input type="text" class="form-control" id="judul" name="judul" /></th>
+								<td>
+									@if($breadcrumb=='Detail')
+										{{ $data->judul }}
+									@else
+										<input type="text" class="form-control" id="judul" name="judul"
+											value="{{ (isset($data)) ? $data->judul : '' }}" />
+									@endif
+								</td>
 							</tr>
 							<tr>
 								<th><label for="thumbnail">Thumbnail</label></th>
-								<th>
-									<input type="file" class="form-control" id="thumbnail" name="thumbnail[]" onchange="readURL(this);" />
-									<br hidden />
-									<img id="preview_thumbnail" src="#" alt="Thumbnail" hidden />
-								</th>
+								<td>
+									@if($breadcrumb=='Detail')
+										<img id="preview_thumbnail" src="{{ asset('upload/poster/'. $data->id .'/'. $data->thumbnail) }}"
+											alt="Thumbnail" />
+									@else
+										@if(isset($data))
+											Current file : 
+											<a href="{{ asset('upload/poster/'. $data->id .'/'. $data->thumbnail) }}"
+												target="_blank" class="txt-dec-und">
+												{{ $data->thumbnail }}
+											</a>
+										@endif
+										<input type="file" class="form-control" id="thumbnail" name="thumbnail[]" onchange="readURL(this);" />
+										<br hidden />
+										<img id="preview_thumbnail" src="#" alt="Thumbnail" hidden />
+									@endif
+								</td>
 							</tr>
+							@if($breadcrumb=='Detail')
+							<tr>
+								<th><label for="isi">Isi</label></th>
+								<td>{!! $data->isi !!}</td>
+							</tr>
+							@else
 							<tr>
 								<th rowspan="2"><label for="isi">Isi</label></th>
-								<th>
+								<td>
 									<button type="button" class="btn btn-secondary mb-1 float-left btn-sm" data-toggle="modal" data-target="#smallmodal">
 										<span class="fa fa-file"></span>
 										File
 									</button>
-								</th>
+								</td>
 							</tr>
 							<tr>
-								<th>
-									<textarea name="isi" id="isi"></textarea>
-								</th>
+								<td>
+									<textarea name="isi" id="isi">
+										{{ (isset($data)) ? $data->isi : '' }}
+									</textarea>
+								</td>
 							</tr>
 							<tr>
 								<th><button type="submit" class="btn btn-primary">Save</button></th>
 								<th>
-									<input name="form_method" type="hidden" value="PATCH">
+									@if(isset($data))
+										<input name="_method" type="hidden" value="PATCH">
+									@endif
 									<input type="hidden" name="_token" value="{{ csrf_token() }}">
 								</th>
 							</tr>
+							@endif
 						</tbody>
 					</table>
 					</form>
@@ -81,21 +116,23 @@
 						</thead>
 						<tbody>
 						@foreach($file as $a)
-							<td>{{ $i++ }}</td>
-							<td>{{ $a->nama }}</td>
-							<td>
-								<input type="text" id="_file{{$i}}" value="{{ asset('upload/file/'. $a->id .'/'. $a->file) }}"
-									class="form-control" readonly />
-							</td>
-							<td class="txt-center" width="20%">
-								<a href="{{ asset('upload/file/'. $a->id .'/'. $a->file) }}" class="btn btn-primary btn-sm txt-dec-und"
-									target="_blank" title="Open File">
-									<span class="fa fa-external-link"></span>
-								</a>
-								<button type="button" title="Copy" class="btn btn-secondary btn-sm" onclick="copyFile({{$i}})">
-									<span class="fa fa-copy"></span>
-								</button>
-							</td>
+							<tr>
+								<td>{{ $i++ }}</td>
+								<td>{{ $a->nama }}</td>
+								<td>
+									<input type="text" id="_file{{$i}}" value="{{ asset('upload/file/'. $a->id .'/'. $a->file) }}"
+										class="form-control" readonly />
+								</td>
+								<td class="txt-center" width="20%">
+									<a href="{{ asset('upload/file/'. $a->id .'/'. $a->file) }}" class="btn btn-primary btn-sm txt-dec-und"
+										target="_blank" title="Open File">
+										<span class="fa fa-external-link"></span>
+									</a>
+									<button type="button" title="Copy" class="btn btn-secondary btn-sm" onclick="copyFile({{$i}})">
+										<span class="fa fa-copy"></span>
+									</button>
+								</td>
+							</tr>
 						@endforeach
 						</tbody>
 					</table>

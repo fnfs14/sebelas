@@ -13,4 +13,7 @@ class Sebelas {
 		$query = DB::table($table)->where($key,$value);
 		return $query;
 	}
+    public static function BadMethodCallException(){
+		return redirect('/');
+	}
 }
