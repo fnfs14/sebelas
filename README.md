@@ -19,3 +19,6 @@ php artisan migrate
 `````
 php artisan db:seed
 `````
+
+## Change Log
+For change log, you can click on this [link](https://github.com/fnfs14/sebelas/blob/master/changelog.md).
