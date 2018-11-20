@@ -24,7 +24,7 @@
 					</ul>
 				</li>
 				@foreach($_menu as $a)
-					<?php $_sidebar = Sebelas::table('menu','parent',$a->id); ?>
+					<?php $_sidebar = Sebelas::menu($a->id); ?>
 					@if($_sidebar->count()==0)
 						<li class="">
 							<a href="{{ url($a->url) }}"> <i class="menu-icon fa fa-dot-circle-o"></i>{{ $a->judul }} </a>

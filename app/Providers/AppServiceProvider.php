@@ -18,8 +18,7 @@ class AppServiceProvider extends ServiceProvider
     {
         View::composer('*', function ($view) {
             if (Auth::check() == 'true') {				
-				$_menu = _Menu::withTrashed()
-					->where('menu','admin')
+				$_menu = _Menu::where('menu','admin')
 					->whereNull('parent')
 					->orderBy('judul', 'ASC')
 					->get(); // get all menu data

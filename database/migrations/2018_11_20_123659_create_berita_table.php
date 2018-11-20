@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateFileTable extends Migration {
+class CreateBeritaTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,11 +12,15 @@ class CreateFileTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('file', function(Blueprint $table)
+		Schema::create('berita', function(Blueprint $table)
 		{
 			$table->string('id', 36)->primary();
-			$table->string('nama');
-			$table->text('file', 65535);
+			$table->string('judul');
+			$table->string('thumbnail');
+			$table->dateTime('publish')->nullable();
+			$table->string('sinopsis')->nullable();
+			$table->text('isi', 65535)->nullable();
+			$table->string('tempat')->nullable();
 			$table->timestamps();
 			$table->softDeletes();
 		});
@@ -30,7 +34,7 @@ class CreateFileTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('file');
+		Schema::drop('berita');
 	}
 
 }

@@ -2,6 +2,7 @@
 namespace App\Helpers;
  
 use Illuminate\Support\Facades\DB;
+use App\_Menu;
  
 class Sebelas {
     /**
@@ -9,11 +10,12 @@ class Sebelas {
      * 
      * @return string
      */
-    public static function table($table,$key,$value){
-		$query = DB::table($table)->where($key,$value);
+    public static function menu($value){
+		$query = _Menu::where('parent',$value);
 		return $query;
 	}
     public static function BadMethodCallException(){
-		return redirect('/');
+		// return redirect('/');
+		return abort(404);
 	}
 }

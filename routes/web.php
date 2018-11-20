@@ -28,4 +28,5 @@ Route::group(['middleware' => ['loggedin']], function () {
 	Route::resource('/menu/client', 'admin\menu');
 	Route::resource('/poster', 'admin\poster');
 	Route::resource('/file', 'admin\file');
+	Route::resource('/berita', 'admin\berita');
 });

@@ -15,8 +15,8 @@
 		<div class="col-md-12">
 			<div class="card">
 				<div class="card-header">
-					<strong class="card-title txt-transform-capt">Poster</strong>
-					<a href="{{ url('poster/create') }}" class="btn btn-outline-secondary mb-1 float-right btn-sm">
+					<strong class="card-title txt-transform-capt">Berita</strong>
+					<a href="{{ url('berita/create') }}" class="btn btn-outline-secondary mb-1 float-right btn-sm">
 						<span class="fa fa-plus"></span>
 						Tambah
 					</a>
@@ -58,7 +58,7 @@
 									<?php
 										$_btn = 'secondary';
 										$_title = 'Rincian';
-										$_link = url('poster/'. $a->id);
+										$_link = url('berita/'. $a->id);
 										$_icon = 'fa fa-eye';
 									?>
 									<a href='{{$_link}}' class='btn btn-{{$_btn}} btn-sm' title='{{$_title}}'>
@@ -67,7 +67,7 @@
 									<?php
 										$_btn = 'info';
 										$_title = 'Ubah';
-										$_link = url('poster/'. $a->id .'/edit');
+										$_link = url('berita/'. $a->id .'/edit');
 										$_icon = 'fa fa-pencil';
 									?>
 									<a href='{{$_link}}' class='btn btn-{{$_btn}} btn-sm' title='{{$_title}}'>
@@ -76,7 +76,7 @@
 									@if($a->publish == "")
 										{!! Form::open([
                                                 'method' => 'POST',
-                                                'url' => ['/poster', $a->id],
+                                                'url' => ['/berita', $a->id],
                                                 'style' => 'display:inline'
                                             ]) !!}											
 											<input name="_method" type="hidden" value="PATCH">
@@ -93,7 +93,7 @@
 									@else
 										{!! Form::open([
                                                 'method' => 'POST',
-                                                'url' => ['/poster', $a->id],
+                                                'url' => ['/berita', $a->id],
                                                 'style' => 'display:inline'
                                             ]) !!}											
 											<input name="_method" type="hidden" value="PATCH">
@@ -128,7 +128,7 @@
 		<div class="col-sm-4">
 			<div class="page-header float-left">
 				<div class="page-title">
-					<h1>Poster</h1>
+					<h1>Berita</h1>
 				</div>
 			</div>
 		</div>
@@ -136,7 +136,7 @@
 			<div class="page-header float-right">
 				<div class="page-title">
 					<ol class="breadcrumb text-right">
-						<li class="">Poster</li>
+						<li class="">Berita</li>
 						<li class="active txt-transform-capt">Index</li>
 					</ol>
 				</div>

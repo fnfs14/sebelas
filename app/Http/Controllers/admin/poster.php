@@ -40,8 +40,14 @@ class poster extends Controller
 		return redirect('poster');
 	}
 	function update(Request $r, $id){
-        $r = $r->all();
         $data = _Poster::findOrFail($id);
+		if(isset($r['thumbnail'])){
+			$thumbnail = $this->_upload($r,'thumbnail',$id,'poster');
+			$r = $r->all();
+			$r['thumbnail'] = $thumbnail;
+		}else{
+			$r = $r->all();
+		}
         $query = $data->update($r);
 		$this->_flashUpdate($query,$data->judul);
 		return redirect('poster');

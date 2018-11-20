@@ -15,14 +15,14 @@
 		<div class="col-md-12">
 			<div class="card">
 				<div class="card-header">
-					<strong class="card-title txt-transform-capt">{{$breadcrumb}} Poster</strong>
-					<a href="{{ url('poster') }}" class="btn btn-outline-secondary mb-1 float-right btn-sm">
+					<strong class="card-title txt-transform-capt">{{$breadcrumb}} berita</strong>
+					<a href="{{ url('berita') }}" class="btn btn-outline-secondary mb-1 float-right btn-sm">
 						<span class="fa fa-arrow-left"></span>
 						Kembali
 					</a>
 				</div>
 				<div class="card-body">
-					<form action="{{ (!isset($data)) ? url('poster') : url('poster/'.$data->id) }}"
+					<form action="{{ (!isset($data)) ? url('berita') : url('berita/'.$data->id) }}"
 						method="post" enctype="multipart/form-data">
 					<table id="" class="table">
 						<tbody>
@@ -41,12 +41,12 @@
 								<th><label for="thumbnail">Thumbnail</label></th>
 								<td>
 									@if($breadcrumb=='Detail')
-										<img id="preview_thumbnail" src="{{ asset('upload/poster/'. $data->id .'/'. $data->thumbnail) }}"
+										<img id="preview_thumbnail" src="{{ asset('upload/berita/'. $data->id .'/'. $data->thumbnail) }}"
 											alt="Thumbnail" />
 									@else
 										@if(isset($data))
 											Current file : 
-											<a href="{{ asset('upload/poster/'. $data->id .'/'. $data->thumbnail) }}"
+											<a href="{{ asset('upload/berita/'. $data->id .'/'. $data->thumbnail) }}"
 												target="_blank" class="txt-dec-und">
 												{{ $data->thumbnail }}
 											</a>
@@ -145,7 +145,7 @@
 
 @push('scripts')
 	<script src="{{ asset('js/ckeditor4full/ckeditor.js') }}"></script>
-	<script src="{{ asset('js/admin/poster.js') }}"></script>
+	<script src="{{ asset('js/admin/berita.js') }}"></script>
 @endpush
 
 @section('breadcrumb')
@@ -153,7 +153,7 @@
 		<div class="col-sm-4">
 			<div class="page-header float-left">
 				<div class="page-title">
-					<h1>Poster</h1>
+					<h1>Berita</h1>
 				</div>
 			</div>
 		</div>
@@ -161,7 +161,7 @@
 			<div class="page-header float-right">
 				<div class="page-title">
 					<ol class="breadcrumb text-right">
-						<li class="">Poster</li>
+						<li class="">Berita</li>
 						<li class="active txt-transform-capt">{{$breadcrumb}}</li>
 					</ol>
 				</div>
