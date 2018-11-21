@@ -1,6 +1,10 @@
 # Sebelas
 Website SMKN 11 Bandung
 
+## Requirements
+- PHP 7
+- MySql
+
 ## Installation
 Follow each command below so that the installation process runs correctly.
 ### Update Composer
