@@ -1,5 +1,6 @@
 # Sebelas
-Website SMKN 11 Bandung
+Website SMKN 11 Bandung.
+This website dashboard using [Sufee HTML5 Admin Dashboard Template](https://github.com/puikinsh/sufee-admin-dashboard).
 
 ## Requirements
 - PHP 7
